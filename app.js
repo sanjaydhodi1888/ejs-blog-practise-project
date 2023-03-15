@@ -11,7 +11,7 @@ const aboutContent =
 const contactContent =
   "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
 
-const postsArray = [];
+const postsArray = [{ title: "d", postbody: "this is post content" }];
 
 const app = express();
 
@@ -21,7 +21,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.get("/", (req, resp) => {
-  resp.render("home", { homeStartingContent: homeStartingContent });
+  resp.render("home", {
+    homeStartingContent: homeStartingContent,
+    postsArray: postsArray,
+  });
 });
 
 app.get("/about", (req, resp) => {
@@ -44,10 +47,22 @@ app.post("/compose", (req, resp) => {
     title: posttitle,
     postbody: postbody,
   };
-
   postsArray.push(post);
-
   resp.redirect("/compose");
+});
+
+app.get("/post/:name", (req, resp) => {
+  let requestedData = req.params.name;
+  postsArray.forEach((post) => {
+    if (requestedData === post.title) {
+      console.log("match found");
+    } else {
+      console.log("match not found");
+    }
+  });
+
+  if (requestedData === "") {
+  }
 });
 
 app.listen(1888, function () {
