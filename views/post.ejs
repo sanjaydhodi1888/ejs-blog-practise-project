@@ -1,0 +1,5 @@
+<%- include("partials/header") -%> <% searchMatchingPost.forEach((item)=>{ %>
+<h1>post page</h1>
+<h3><%= item.title %></h3>
+<p><%= item.content%></p>
+<% });%> <%- include("partials/footer") -%>

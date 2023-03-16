@@ -1,17 +1,7 @@
-<%- include("partials/header") -%> 
-
-
-
-
- <% postsArray.forEach((item)=>{ %>
-    <h3><%= item.title %></h3>
-    <p><%= item.postbody %></p>
- <% });%>
-
-
-
-
-  
-
-  <%- include("partials/footer") -%>
-</postArray.length;>
+<%- include("partials/header") -%> <% postsArray.forEach((item)=>{ %>
+<h3><%= item.title %></h3>
+<p>
+  <%= item.postbody.substring(0,100) + "....."; %>
+  <a href="http://localhost:1888/post/<%= item.title %>">Read more </a>
+</p>
+<% });%> <%- include("partials/footer") -%>
